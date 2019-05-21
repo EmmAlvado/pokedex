@@ -1,18 +1,30 @@
+// @flow
+
 import React from 'react';
+import type {Node} from 'react';
+
 import DropdownSelect from '../DropdownSelect';
 import Field from './Field';
 
 const valueKey = "value";
 
 function DropdownSelectFormAware({
-       input: { value: selectedValue, onChange },
-       ...props
+    input: { value: selectedValue, onChange },
+    actualFilter,
+    ...props
    }) {
     delete props.meta;
 
+    const preselectedValue = actualFilter.replace('/', '');
+    let myPreselectedValue = selectedValue;
+
+    if(preselectedValue.length > 0){
+        myPreselectedValue = preselectedValue;
+    }
+
     return (
         <DropdownSelect
-            selectedValue={selectedValue}
+            selectedValue={myPreselectedValue}
             valueKey={valueKey}
             labelKey="label"
             onSelect={option => onChange(option[valueKey])}
@@ -21,13 +33,18 @@ function DropdownSelectFormAware({
     );
 }
 
-class DropdownSelectField extends React.Component {
-    constructor(props, context) {
-        super(props, context);
 
-    }
+export type Props = {
+    actualFilter: string,
+    id: string,
+    name: string,
+    options: Array<{label: string, value: string}>,
+    placeholder: string,
+}
 
-    render(){
+class DropdownSelectField extends React.Component<Props> {
+
+    render():Node{
         return <Field component={DropdownSelectFormAware} {...this.props} />;
     }
 }
