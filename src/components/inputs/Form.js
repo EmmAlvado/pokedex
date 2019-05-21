@@ -1,12 +1,18 @@
+// @flow
+
 import React from 'react';
 import { reduxForm } from 'redux-form';
 
 import BSForm from 'react-bootstrap/Form';
 
-const FormForRedux = function FormForRedux({ children, ...props }) {
+export type Props = {
+    children: Node,
+};
+
+const FormForRedux = function FormForRedux({ children }:Props) {
 
     return (
-        <BSForm {...props}>
+        <BSForm>
             {children}
         </BSForm>
     );

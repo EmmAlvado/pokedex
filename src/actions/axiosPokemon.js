@@ -1,9 +1,19 @@
+// @flow
+
 import React from 'react';
 import axios from 'axios';
 
 import PokemonList from './PokemonList'
 
-class AxiosPokemon extends React.Component {
+export type Props = {
+    filter?: string
+};
+
+export type State = {
+    pokemonsList: Array<{id:number, name:string ,url:string}>
+};
+
+class AxiosPokemon extends React.Component<Props, State> {
     state = {
         pokemonsList: []
     }
@@ -20,8 +30,9 @@ class AxiosPokemon extends React.Component {
 
     }
 
-    addId = (poke) => {
-        poke.forEach(el => {
+    addId = (poke:Array<{ id:number, name:string ,url:string}>) => {
+
+        poke.forEach(function(el:{ id:number, name:string ,url:string}){
             const urlSplit = el.url.split('/');
             const id = urlSplit[urlSplit.length -2];
 
@@ -31,26 +42,26 @@ class AxiosPokemon extends React.Component {
         return poke;
     }
 
-    filterAsc = ( a, b) => {
+    filterAsc = ( a:{id:number, name:string ,url:string}, b:{id:number, name:string ,url:string}) => {
 
         if (a.name < b.name) return -1;
-        else if (a.name == b.name) return 0;
+        else if (a.name === b.name) return 0;
         else return 1;
 
     }
 
-    filterDesc = ( a, b) => {
+    filterDesc = ( a:{id:number, name:string ,url:string}, b:{id:number, name:string ,url:string}) => {
 
         if (a.name > b.name) return -1;
-        else if (a.name == b.name) return 0;
+        else if (a.name === b.name) return 0;
         else return 1;
 
     }
 
-    filterIdDesc = ( a, b) => {
+    filterIdDesc = ( a:{id:number, name:string ,url:string}, b:{id:number, name:string ,url:string}) => {
 
         if (a.id > b.id) return -1;
-        else if (a.id == b.id) return 0;
+        else if (a.id === b.id) return 0;
         else return 1;
 
     }
@@ -72,6 +83,9 @@ class AxiosPokemon extends React.Component {
                 break;
             case '/IdDesc':
                 poke = this.state.pokemonsList.slice(0).sort(this.filterIdDesc);;
+                break;
+            default:
+                poke = this.state.pokemonsList;
                 break;
 
         }

@@ -6,10 +6,6 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import MainPage from './page/MainPage'
 
 class Root extends Component {
-    constructor() {
-        super();
-
-    }
 
     render() {
         return (

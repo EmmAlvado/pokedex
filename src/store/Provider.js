@@ -1,26 +1,32 @@
+// @flow
+
 import React from 'react';
 import { Provider as ReduxProvider } from 'react-redux';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { reducer as formReducer } from 'redux-form';
 
 import {
-    ConnectedRouter,
     routerReducer as routing,
     routerMiddleware,
 } from 'react-router-redux';
 
-import createHistory from 'history/createMemoryHistory';
+import { createMemoryHistory } from 'history'
+
 
 const rootReducer = combineReducers({
     form: formReducer,
     routing,
 })
 
-const history = createHistory();
+const history = createMemoryHistory();
 
 const middleware = routerMiddleware(history);
 
 let currentWindow = {};
+
+export type Props = {
+    children: Node
+};
 
 const store = createStore(
     rootReducer,
@@ -30,7 +36,7 @@ const store = createStore(
     applyMiddleware(middleware)
 );
 
-function Provider({ children }) {
+function Provider({ children }:Props) {
     return (
         <ReduxProvider store={store}>
                 { children }

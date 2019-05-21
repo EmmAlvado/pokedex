@@ -1,13 +1,25 @@
+// @flow
+
 import React from 'react';
+import type {Node} from 'react';
+
 import classnames from "classnames";
 import BsCard from 'react-bootstrap/Card'
 import Button from "react-bootstrap/Button";
 
-function Card({ className, title, children, img, pokemonId, ...props }) {
+export type Props = {
+    className?: string,
+    title: string,
+    children?: Node | string,
+    img: string,
+    pokemonId: number,
+};
+
+function Card({ className, title, children, img, pokemonId}:Props) {
     const classNames = classnames(className, 'poke-card');
 
     return (
-        <BsCard {...props} className={classNames}>
+        <BsCard className={classNames}>
             <BsCard.Img variant="top" src={img} />
             <BsCard.Body>
                 <BsCard.Title>#{pokemonId} - {title}</BsCard.Title>
