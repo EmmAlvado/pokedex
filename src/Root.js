@@ -7,7 +7,6 @@ import MainPageConnected from './page/MainPageConnected';
 
 class Root extends Component {
     render() {
-
         return (
             <Provider>
                 <Router>
