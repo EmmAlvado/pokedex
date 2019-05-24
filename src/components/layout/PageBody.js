@@ -1,23 +1,21 @@
-import PropTypes from 'prop-types';
+// @flow
+
 import React from 'react';
-import classnames from 'classnames';
+import type { Node } from 'react';
 
 import Row from 'react-bootstrap/Row';
 
-function PageBody({ className, children }) {
-    const classNames = classnames(className, 'poke-page-body');
+export type Props = {
+    children: Node,
+};
 
+function PageBody({ children }: Props) {
     return (
-        <div className={classNames}>
+        <div className="poke-page-body">
             <Row className="poke-page-body-row">{children}</Row>
         </div>
     );
 }
-
-PageBody.propTypes = {
-    children: PropTypes.node,
-    className: PropTypes.string,
-};
 
 PageBody.displayName = 'Page.Body';
 

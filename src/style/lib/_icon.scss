@@ -1,0 +1,27 @@
+.poke-fav-input {
+  font-size: $font-size-lg;
+  position: absolute;
+  top: $grid-gutter-width/2;
+  right: $grid-gutter-width/2;
+  cursor: pointer;
+
+  &.active{
+    color: $red;
+  }
+
+  &.main{
+    font-size: 36px;
+  }
+
+}
+
+.poke-fav-input-container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 10;
+
+  input[type="checkbox"]{
+    display: none;
+  }
+}

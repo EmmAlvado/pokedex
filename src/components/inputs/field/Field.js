@@ -1,18 +1,17 @@
-import React from 'react';
+// @flow
+
+import React, { type ComponentType } from 'react';
 import { Field as RFField } from 'redux-form';
+import type { FieldProps } from 'redux-form';
 
-const trimFn = value => value && value.trim();
+export type Props = {
+    ...FieldProps,
+    name: string,
+    component: ComponentType<FieldProps> | string,
+};
 
-const Field = function Field({ normalize, trim, ...props }) {
-    let normalizeFn = undefined;
-
-    if (normalize) {
-        normalizeFn = normalize;
-    } else if (trim) {
-        normalizeFn = trimFn;
-    }
-
-    return <RFField {...props} normalize={normalizeFn} />;
+const Field = function Field({ ...props }: Props) {
+    return <RFField {...props} />;
 };
 
 export default Field;

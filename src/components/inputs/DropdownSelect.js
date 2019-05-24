@@ -7,7 +7,6 @@ import DropdownButton from 'react-bootstrap/DropdownButton';
 
 const findFn = memoize((key, value) => option => option[key] === value);
 
-
 export type Props = {
     id: string,
     disabled?: boolean,
@@ -15,20 +14,20 @@ export type Props = {
     selectedValue?: string,
     labelKey: string,
     valueKey: string,
-    options: Array<{label:string, value:string}>,
-    onSelect: ({label:string, value:string}) => void,
+    options: Array<{ label: string, value: string }>,
+    onSelect: ({ label: string, value: string }) => void,
 };
 
 function DropdownSelect({
-        id,
-        disabled,
-        placeholder,
-        selectedValue,
-        labelKey,
-        valueKey,
-        options,
-        onSelect
-    }:Props ) {
+    id,
+    disabled,
+    placeholder,
+    selectedValue,
+    labelKey,
+    valueKey,
+    options,
+    onSelect,
+}: Props) {
     const selectedOption = options.find(findFn(valueKey, selectedValue));
 
     return (
@@ -37,15 +36,15 @@ function DropdownSelect({
             id={id}
             title={selectedOption ? selectedOption[labelKey] : placeholder}
         >
-            {options.map((option:{label:string, value:string}) => {
-                return(
+            {options.map((option: { label: string, value: string }) => {
+                return (
                     <Dropdown.Item
-                        key={"filter"+ option[valueKey]}
+                        key={'filter' + option[valueKey]}
                         onClick={() => onSelect(option)}
                     >
                         {option[labelKey]}
                     </Dropdown.Item>
-                )
+                );
             })}
         </DropdownButton>
     );
