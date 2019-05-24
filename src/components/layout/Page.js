@@ -1,17 +1,17 @@
-import PropTypes from 'prop-types';
+// @flow
+
 import React from 'react';
+import type { Node } from 'react';
 import PageBody from './PageBody';
 import PageHeader from './PageHeader';
 
-function Page({ className, children }) {
+export type Props = {
+    children: Node,
+};
 
+function Page({ children }: Props) {
     return <div className="poke-page">{children}</div>;
 }
-
-Page.propTypes = {
-    children: PropTypes.node,
-    className: PropTypes.string,
-};
 
 Page.Body = PageBody;
 Page.Header = PageHeader;
