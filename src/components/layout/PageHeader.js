@@ -1,11 +1,14 @@
+// @flow
+
 import React from 'react';
-import classnames from "classnames";
+import type { Node } from 'react';
 
-function PageHeader({ className, layout, children }) {
-    const classNames = classnames(className, 'poke-page-header');
+export type Props = {
+    children: Node,
+};
 
-    return <div className={classNames}>{children}</div>;
+function PageHeader({ children }: Props) {
+    return <div className={'poke-page-header'}>{children}</div>;
 }
-
 
 export default PageHeader;

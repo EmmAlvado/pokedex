@@ -9,17 +9,12 @@ export type Props = {
     children: Node,
 };
 
-const FormForRedux = function FormForRedux({ children }:Props) {
-
-    return (
-        <BSForm>
-            {children}
-        </BSForm>
-    );
+const FormForRedux = function FormForRedux({ children }: Props) {
+    return <BSForm>{children}</BSForm>;
 };
 
 const Form = reduxForm({
-    form: 'pokeForm'
+    form: 'pokeForm',
 })(FormForRedux);
 
-export default Form ;
+export default Form;
