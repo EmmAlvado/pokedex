@@ -17,7 +17,19 @@ const MainPageConnected = (state, props) => {
         state.form.hasOwnProperty('pokeForm') &&
         state.form.pokeForm.hasOwnProperty('values')
     ) {
-        newLocation = '/' + state.form.pokeForm.values.filterSelector;
+        const values = state.form.pokeForm.values;
+
+        if (
+            values.hasOwnProperty('filterSelector') &&
+            values.hasOwnProperty('favSelector') &&
+            values.favSelector
+        ) {
+            newLocation = '/Fav/' + values.filterSelector;
+        } else if (values.hasOwnProperty('filterSelector')) {
+            newLocation = '/' + values.filterSelector;
+        } else {
+            newLocation = '/Fav';
+        }
 
         if (newLocation !== props.location.pathname) {
             newState = {

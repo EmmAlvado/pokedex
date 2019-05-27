@@ -2,19 +2,36 @@
 
 import React from 'react';
 import type { Node } from 'react';
+import classnames from 'classnames';
 
 import Card from '../components/layout/Card';
 import Col from 'react-bootstrap/Col';
 
 export type Props = {
     pokemonsList: Array<{ id: number, name: string, url: string }>,
+    isFavTime: boolean,
 };
 
 class PokemonList extends React.PureComponent<Props> {
+    mayHide = (id: number) => {
+        const newId: string = id.toString();
+
+        const favoritesPokemons: string =
+            localStorage.getItem('favoritesPokemons') || '';
+
+        const hasFavoritesPokemons: ?boolean =
+            favoritesPokemons.split(',').indexOf(newId) < 0;
+        return hasFavoritesPokemons;
+    };
+
     render(): Node {
         return this.props.pokemonsList.map(
             (pokemon: { id: number, name: string, url: string }) => {
-                const pokemonId = pokemon.id;
+                const pokemonId: number = pokemon.id;
+                const classNames = classnames({
+                    'poke-not-fav':
+                        this.props.isFavTime && this.mayHide(pokemonId),
+                });
 
                 return (
                     <Col
@@ -23,6 +40,7 @@ class PokemonList extends React.PureComponent<Props> {
                         md={4}
                         lg={3}
                         key={'pokemon-col-' + pokemonId}
+                        className={classNames}
                     >
                         <Card
                             title={pokemon.name}

@@ -2,19 +2,18 @@
 
 import React from 'react';
 import { Provider as ReduxProvider } from 'react-redux';
+import { createBrowserHistory } from 'history';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { reducer as formReducer } from 'redux-form';
 
 import { routerReducer as routing, routerMiddleware } from 'react-router-redux';
-
-import { createMemoryHistory } from 'history';
 
 const rootReducer = combineReducers({
     form: formReducer,
     routing,
 });
 
-const history = createMemoryHistory();
+export const history = createBrowserHistory();
 
 const middleware = routerMiddleware(history);
 

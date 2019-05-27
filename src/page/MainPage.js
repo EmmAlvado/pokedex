@@ -10,7 +10,8 @@ import PageHeader from '../components/layout/PageHeader';
 import PageBody from '../components/layout/PageBody';
 import Form from '../components/inputs/Form';
 import DropdownSelectField from '../components/inputs/field/DropdownSelectField';
-import PokemonList from '../actions/axiosPokemon';
+import FavNavField from '../components/inputs/field/FavNavField';
+import AxiosPokemon from '../actions/axiosPokemon';
 
 export type ContextRouter = {|
     history: RouterHistory,
@@ -18,15 +19,18 @@ export type ContextRouter = {|
 |};
 
 class MainPage extends React.Component<ContextRouter> {
-    componentDidUpdate(prevProps) {
-        if (this.props.location.pathname !== prevProps.location.pathname) {
-            this.props.history.push(prevProps.location.pathname);
+    componentDidUpdate() {
+        if (
+            this.props.location.pathname !==
+            this.props.history.location.pathname
+        ) {
+            this.props.history.push(this.props.location.pathname);
         }
     }
 
     render(): Node {
         return (
-            <Form id="pageForm">
+            <Form location={this.props.location} id="pageForm">
                 <PageHeader>
                     <DropdownSelectField
                         actualFilter={this.props.location.pathname}
@@ -52,10 +56,11 @@ class MainPage extends React.Component<ContextRouter> {
                             },
                         ]}
                     />
+                    <FavNavField name="favSelector" />
                 </PageHeader>
                 <Page>
                     <PageBody>
-                        <PokemonList filter={this.props.location.pathname} />
+                        <AxiosPokemon filter={this.props.location.pathname} />
                     </PageBody>
                 </Page>
             </Form>

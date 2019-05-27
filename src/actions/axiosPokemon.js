@@ -6,7 +6,7 @@ import axios from 'axios';
 import PokemonList from './PokemonList';
 
 export type Props = {
-    filter?: string,
+    filter: string,
 };
 
 export type State = {
@@ -14,9 +14,12 @@ export type State = {
 };
 
 class AxiosPokemon extends React.Component<Props, State> {
-    state = {
-        pokemonsList: [],
-    };
+    constructor(props: Props) {
+        super(props);
+        this.state = {
+            pokemonsList: [],
+        };
+    }
 
     componentDidMount() {
         axios.get('https://pokeapi.co/api/v2/pokemon/?limit=807').then(res => {
@@ -71,17 +74,18 @@ class AxiosPokemon extends React.Component<Props, State> {
 
         let poke = this.state.pokemonsList;
 
-        switch (filter) {
-            case '/AlphaAsc':
+        const itsFavTime = filter.indexOf('Fav') >= 0;
+
+        const realFilter = filter.split('/').pop();
+
+        switch (realFilter) {
+            case 'AlphaAsc':
                 poke = this.state.pokemonsList.slice(0).sort(this.filterAsc);
                 break;
-            case '/AlphaDesc':
+            case 'AlphaDesc':
                 poke = this.state.pokemonsList.slice(0).sort(this.filterDesc);
                 break;
-            case '/IdAsc':
-                poke = this.state.pokemonsList;
-                break;
-            case '/IdDesc':
+            case 'IdDesc':
                 poke = this.state.pokemonsList.slice(0).sort(this.filterIdDesc);
                 break;
             default:
@@ -89,7 +93,7 @@ class AxiosPokemon extends React.Component<Props, State> {
                 break;
         }
 
-        return <PokemonList pokemonsList={poke} />;
+        return <PokemonList pokemonsList={poke} isFavTime={itsFavTime} />;
     }
 }
 
