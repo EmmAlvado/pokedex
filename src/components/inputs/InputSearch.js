@@ -10,7 +10,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 class InputSearch extends React.Component {
     onChange = e => {
-        console.log(e);
+        const ok = e;
     };
 
     render() {
