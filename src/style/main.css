@@ -7045,6 +7045,14 @@ a.text-dark:hover, a.text-dark:focus {
   .poke-fav-input-container input[type="checkbox"] {
     display: none; }
 
+.btn,
+.form-control {
+  padding: 4px 10px;
+  line-height: 20px; }
+
+.form-control {
+  height: 30px; }
+
 .poke-page {
   margin: 30px; }
 
@@ -7056,6 +7064,9 @@ a.text-dark:hover, a.text-dark:focus {
   padding: 15px 30px;
   font-size: 1rem;
   line-height: 1.5; }
+
+.poke-page-header-left {
+  display: flex; }
 
 body {
   background-color: #ced4da;
